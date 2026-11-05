@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#16834a"><meta name="description" content="Cerca Ya: todo lo que buscas, cerca de ti.">
+<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css">
+<title>Cerca Ya</title>
+</head>
+<body>
+<header><div class="brand"><span class="pin">⌖</span><span>Cerca <b>Ya</b></span></div><p>Todo lo que buscas, cerca de ti.</p></header>
+<main>
+<section class="hero"><h1>¿Qué necesitas hoy?</h1><p>Encuentra oportunidades y soluciones cerca de ti.</p>
+<input id="search" type="search" placeholder="Buscar trabajo, servicios, productos...">
+</section>
+<nav class="categories" aria-label="Categorías">
+<button data-cat="Todos" class="active">Todo</button><button data-cat="Trabajo">Trabajo</button><button data-cat="Servicios">Servicios</button><button data-cat="Compras">Compras</button><button data-cat="Ventas">Ventas</button>
+</nav>
+<section class="listings" id="listings">
+<article class="listing" data-cat="Trabajo"><small>TRABAJO · EJEMPLO</small><h3>Se busca ayudante de tienda</h3><p>Oportunidad de ejemplo para mostrar cómo aparecerán las ofertas.</p><span>El Coca · Contacto de demostración</span></article>
+<article class="listing" data-cat="Servicios"><small>SERVICIOS · EJEMPLO</small><h3>Servicio de limpieza</h3><p>Publicación de demostración. No es una oferta real.</p><span>El Coca · Contacto de demostración</span></article>
+<article class="listing" data-cat="Compras"><small>COMPRAS · EJEMPLO</small><h3>Busco bicicleta usada</h3><p>Ejemplo de solicitud de compra.</p><span>El Coca · Contacto de demostración</span></article>
+<article class="listing" data-cat="Ventas"><small>VENTAS · EJEMPLO</small><h3>Venta de mesa de madera</h3><p>Ejemplo de anuncio de venta.</p><span>El Coca · Contacto de demostración</span></article>
+</section>
+<section class="publish"><h2>Publica lo que necesitas</h2><p>Esta demostración todavía no envía anuncios a otros usuarios.</p>
+<form id="postForm"><input id="title" required placeholder="Título de tu publicación"><select id="category"><option>Trabajo</option><option>Servicios</option><option>Compras</option><option>Ventas</option></select><textarea id="details" required placeholder="Describe tu publicación"></textarea><button class="primary">Agregar a esta demostración</button></form>
+<div id="notice" role="status"></div></section>
+</main><footer>© Cerca Ya · Versión de prueba</footer>
+<script src="app.js"></script><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body></html>
