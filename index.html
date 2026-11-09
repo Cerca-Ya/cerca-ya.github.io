@@ -25,5 +25,23 @@
 <form id="postForm"><input id="title" required placeholder="Título de tu publicación"><select id="category"><option>Trabajo</option><option>Servicios</option><option>Compras</option><option>Ventas</option></select><textarea id="details" required placeholder="Describe tu publicación"></textarea><button class="primary">Agregar a esta demostración</button></form>
 <div id="notice" role="status"></div></section>
 </main><footer>© Cerca Ya · Versión de prueba</footer>
-<script src="app.js"></script><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+<script src="app.js"></script><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});</script><script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDbKHWP1MQsmDvFReSz-EDKafFCBT3la_E",
+    authDomain: "cerca-ya-f67f0.firebaseapp.com",
+    projectId: "cerca-ya-f67f0",
+    storageBucket: "cerca-ya-f67f0.firebasestorage.app",
+    messagingSenderId: "943803719513",
+    appId: "1:943803719513:web:d3cd9b9d7fd9ea8da0f648"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+    </script>
 </body></html>
