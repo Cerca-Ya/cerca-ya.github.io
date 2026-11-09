@@ -9,6 +9,21 @@
 <body>
 <header><div class="brand"><span class="pin">⌖</span><span>Cerca <b>Ya</b></span></div><p>Todo lo que buscas, cerca de ti.</p></header>
 <main>
+  <section class="publish">
+  <h2>Bienvenido a Cerca Ya</h2>
+  <p>Regístrate o inicia sesión para participar.</p>
+
+  <form id="authForm">
+    <input id="authEmail" type="email" placeholder="Tu correo electrónico" required>
+    <input id="authPassword" type="password" placeholder="Tu contraseña (mínimo 6 caracteres)" minlength="6" required>
+
+    <button type="button" id="registerBtn">Crear cuenta</button>
+    <button type="button" id="loginBtn">Iniciar sesión</button>
+    <button type="button" id="logoutBtn" hidden>Cerrar sesión</button>
+  </form>
+
+  <p id="authNotice" role="status"></p>
+  </section>
 <section class="hero"><h1>¿Qué necesitas hoy?</h1><p>Encuentra oportunidades y soluciones cerca de ti.</p>
 <input id="search" type="search" placeholder="Buscar trabajo, servicios, productos...">
 </section>
@@ -28,6 +43,7 @@
 <script src="app.js"></script><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});</script><script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -43,5 +59,58 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const emailInput = document.getElementById("authEmail");
+const passwordInput = document.getElementById("authPassword");
+const notice = document.getElementById("authNotice");
+
+document.getElementById("registerBtn").addEventListener("click", async () => {
+  if (!emailInput.reportValidity() || !passwordInput.reportValidity()) return;
+
+  try {
+    await createUserWithEmailAndPassword(
+      auth,
+      emailInput.value.trim(),
+      passwordInput.value
+    );
+    notice.textContent = "¡Cuenta creada correctamente!";
+  } catch (error) {
+    notice.textContent = "Error: " + error.message;
+  }
+});
+
+document.getElementById("loginBtn").addEventListener("click", async () => {
+  if (!emailInput.reportValidity() || !passwordInput.reportValidity()) return;
+
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      emailInput.value.trim(),
+      passwordInput.value
+    );
+    notice.textContent = "¡Has iniciado sesión!";
+  } catch (error) {
+    notice.textContent = "Error: " + error.message;
+  }
+});
+
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    notice.textContent = "Sesión cerrada correctamente.";
+  } catch (error) {
+    notice.textContent = "Error: " + error.message;
+  }
+});
+
+onAuthStateChanged(auth, (user) => {
+  document.getElementById("registerBtn").hidden = !!user;
+  document.getElementById("loginBtn").hidden = !!user;
+  document.getElementById("logoutBtn").hidden = !user;
+
+  if (user) {
+    notice.textContent = "Sesión iniciada: " + user.email;
+  }
+});
     </script>
 </body></html>
