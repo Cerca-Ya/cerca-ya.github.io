@@ -23,6 +23,11 @@
     <button type="button" id="registerBtn">Crear cuenta</button>
     <button type="button" id="loginBtn">Iniciar sesión</button>
     <button type="button" id="logoutBtn" hidden>Cerrar sesión</button>
+    <div id="accountInfo" hidden>
+  <h3>Mi cuenta</h3>
+  <p>Has iniciado sesión como:</p>
+  <strong id="userEmail"></strong>
+    </div>
   </form>
 
   <p id="authNotice" role="status"></p>
@@ -121,15 +126,20 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
     notice.textContent = "Error: " + error.message;
   }
 });
-
+  const accountInfo = document.getElementById("accountInfo");
+const userEmail = document.getElementById("userEmail");
 onAuthStateChanged(auth, (user) => {
   document.getElementById("registerBtn").hidden = !!user;
   document.getElementById("loginBtn").hidden = !!user;
   document.getElementById("logoutBtn").hidden = !user;
 
-  if (user) {
-    notice.textContent = "Sesión iniciada: " + user.email;
-  }
+  accountInfo.hidden = !user;
+  userEmail.textContent = user ? user.email : "";
+
+  notice.textContent = user
+    ? "¡Bienvenido a Cerca Ya! Tu sesión está activa."
+    : "No has iniciado sesión.";
 });
-    </script>
-</body></html>
+</script>
+</body>
+</html>
