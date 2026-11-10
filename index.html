@@ -1,81 +1,243 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#16834a"><meta name="description" content="Cerca Ya: todo lo que buscas, cerca de ti.">
-<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#16834a">
+<meta name="description" content="Cerca Ya: todo lo que buscas, cerca de ti.">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="styles.css">
 <title>Cerca Ya</title>
 </head>
 <body>
+
 <header>
   <div class="brand">
     <span class="pin">⌖</span>
     <span>Cerca <b>Ya</b></span>
   </div>
-
   <p id="welcomeMessage">Todo lo que buscas, cerca de ti.</p>
 </header>
+
 <main>
-  <section class="publish">
-  <h2>Bienvenido a Cerca Ya</h2>
-  <p>Regístrate o inicia sesión para participar.</p>
 
-  <form id="authForm">
-    <input id="authEmail" type="email" placeholder="Tu correo electrónico" required>
-    <input id="authPassword" type="password" placeholder="Tu contraseña (mínimo 6 caracteres)" minlength="6" required>
-    <button type="button" id="forgotPassword">
-    ¿Olvidaste tu contraseña?
-</button>
+<!-- MENÚ PARA VISITANTES -->
+<section id="visitorMenu">
+  <section class="hero">
+    <span class="eyebrow">TU MUNDO, MÁS CERCA</span>
+    <h1>¿Qué necesitas hoy?</h1>
+    <p>Encuentra oportunidades, productos y servicios cerca de ti.</p>
+    <input id="search" type="search"
+      placeholder="⌕ Buscar trabajo, servicios, productos...">
+  </section>
 
-    <button type="button" id="registerBtn">Crear cuenta</button>
-    <button type="button" id="loginBtn">Iniciar sesión</button>
-    <button type="button" id="logoutBtn" hidden>Cerrar sesión</button>
-    <div id="accountInfo" hidden>
-  <h3>Mi cuenta</h3>
-  <p>Has iniciado sesión como:</p>
-  <strong id="userEmail"></strong>
+  <section class="publish auth-panel" id="authPanel">
+    <h2>¡Bienvenido a Cerca Ya!</h2>
+    <p>Inicia sesión o crea tu cuenta para disfrutar de todas las opciones.</p>
+
+    <form id="authForm">
+      <input id="authEmail" type="email"
+        placeholder="Tu correo electrónico" required>
+      <input id="authPassword" type="password"
+        placeholder="Tu contraseña (mínimo 6 caracteres)"
+        minlength="6" required>
+
+      <button type="button" id="forgotPassword" class="text-button">
+        ¿Olvidaste tu contraseña?
+      </button>
+
+      <button type="button" id="registerBtn" class="primary">
+        Crear cuenta
+      </button>
+      <button type="button" id="loginBtn" class="secondary">
+        Iniciar sesión
+      </button>
+    </form>
+    <p id="authNotice" role="status"></p>
+  </section>
+</section>
+
+<!-- MENÚ PARA USUARIOS CON SESIÓN -->
+<section id="memberMenu" hidden>
+
+  <section class="member-hero">
+    <span class="eyebrow">TU ESPACIO PERSONAL</span>
+    <h1>¡Qué bueno tenerte aquí!</h1>
+    <p>Descubre lo que está pasando cerca de ti.</p>
+    <a href="#listings" class="member-search">
+      <span>⌕</span> Explorar publicaciones
+    </a>
+  </section>
+
+  <section class="account-card">
+    <div class="account-avatar">👤</div>
+    <div class="account-details">
+      <span>CUENTA ACTIVA</span>
+      <h2>Mi cuenta</h2>
+      <p id="userEmail"></p>
     </div>
+    <span class="online-dot" title="Sesión activa"></span>
+  </section>
+
+  <section class="dashboard">
+    <h2>Mi menú</h2>
+    <div class="dashboard-grid">
+
+      <a href="#publishSection" class="dashboard-item">
+        <span class="dashboard-icon">＋</span>
+        <strong>Publicar</strong>
+        <small>Crear anuncio</small>
+      </a>
+
+      <a href="#listings" class="dashboard-item">
+        <span class="dashboard-icon">▤</span>
+        <strong>Explorar</strong>
+        <small>Ver publicaciones</small>
+      </a>
+
+      <a href="#listings" class="dashboard-item">
+        <span class="dashboard-icon">♡</span>
+        <strong>Favoritos</strong>
+        <small>Próximamente</small>
+      </a>
+
+      <a href="#publishSection" class="dashboard-item">
+        <span class="dashboard-icon">▣</span>
+        <strong>Mis anuncios</strong>
+        <small>Administrar publicaciones</small>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="logout-area">
+    <button type="button" id="logoutBtn" class="logout-button">
+      Cerrar sesión
+    </button>
+  </div>
+
+</section>
+
+<!-- CATEGORÍAS -->
+<section class="category-section">
+  <h2>Explora por categorías</h2>
+  <nav class="categories" aria-label="Categorías">
+    <button data-cat="Todos" class="active">Todo</button>
+    <button data-cat="Trabajo">Trabajo</button>
+    <button data-cat="Servicios">Servicios</button>
+    <button data-cat="Compras">Compras</button>
+    <button data-cat="Ventas">Ventas</button>
+  </nav>
+</section>
+
+<!-- PUBLICACIONES -->
+<section class="listings-section">
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">DESCUBRE OPORTUNIDADES</span>
+      <h2>Publicaciones cercanas</h2>
+    </div>
+  </div>
+
+  <section class="listings" id="listings">
+
+    <article class="listing" data-cat="Trabajo">
+      <small>TRABAJO · EJEMPLO</small>
+      <h3>Se busca ayudante de tienda</h3>
+      <p>Oportunidad de ejemplo para mostrar cómo aparecerán las ofertas.</p>
+      <span>📍 El Coca · Contacto de demostración</span>
+    </article>
+
+    <article class="listing" data-cat="Servicios">
+      <small>SERVICIOS · EJEMPLO</small>
+      <h3>Servicio de limpieza</h3>
+      <p>Publicación de demostración. No es una oferta real.</p>
+      <span>📍 El Coca · Contacto de demostración</span>
+    </article>
+
+    <article class="listing" data-cat="Compras">
+      <small>COMPRAS · EJEMPLO</small>
+      <h3>Busco bicicleta usada</h3>
+      <p>Ejemplo de solicitud de compra.</p>
+      <span>📍 El Coca · Contacto de demostración</span>
+    </article>
+
+    <article class="listing" data-cat="Ventas">
+      <small>VENTAS · EJEMPLO</small>
+      <h3>Venta de mesa de madera</h3>
+      <p>Ejemplo de anuncio de venta.</p>
+      <span>📍 El Coca · Contacto de demostración</span>
+    </article>
+
+  </section>
+</section>
+
+<!-- FORMULARIO DE PUBLICACIÓN -->
+<section class="publish" id="publishSection" hidden>
+  <h2>Publica lo que necesitas</h2>
+  <p>Comparte tus productos, servicios u oportunidades.</p>
+
+  <form id="postForm">
+    <input id="title" required placeholder="Título de tu publicación">
+
+    <select id="category">
+      <option>Trabajo</option>
+      <option>Servicios</option>
+      <option>Compras</option>
+      <option>Ventas</option>
+    </select>
+
+    <textarea id="details" required
+      placeholder="Describe tu publicación"></textarea>
+
+    <button class="primary">Agregar a esta demostración</button>
   </form>
 
-  <p id="authNotice" role="status"></p>
-  </section>
-<section class="hero"><h1>¿Qué necesitas hoy?</h1><p>Encuentra oportunidades y soluciones cerca de ti.</p>
-<input id="search" type="search" placeholder="Buscar trabajo, servicios, productos...">
+  <div id="notice" role="status"></div>
 </section>
-<nav class="categories" aria-label="Categorías">
-<button data-cat="Todos" class="active">Todo</button><button data-cat="Trabajo">Trabajo</button><button data-cat="Servicios">Servicios</button><button data-cat="Compras">Compras</button><button data-cat="Ventas">Ventas</button>
-</nav>
-<section class="listings" id="listings">
-<article class="listing" data-cat="Trabajo"><small>TRABAJO · EJEMPLO</small><h3>Se busca ayudante de tienda</h3><p>Oportunidad de ejemplo para mostrar cómo aparecerán las ofertas.</p><span>El Coca · Contacto de demostración</span></article>
-<article class="listing" data-cat="Servicios"><small>SERVICIOS · EJEMPLO</small><h3>Servicio de limpieza</h3><p>Publicación de demostración. No es una oferta real.</p><span>El Coca · Contacto de demostración</span></article>
-<article class="listing" data-cat="Compras"><small>COMPRAS · EJEMPLO</small><h3>Busco bicicleta usada</h3><p>Ejemplo de solicitud de compra.</p><span>El Coca · Contacto de demostración</span></article>
-<article class="listing" data-cat="Ventas"><small>VENTAS · EJEMPLO</small><h3>Venta de mesa de madera</h3><p>Ejemplo de anuncio de venta.</p><span>El Coca · Contacto de demostración</span></article>
-</section>
-<section class="publish"><h2>Publica lo que necesitas</h2><p>Esta demostración todavía no envía anuncios a otros usuarios.</p>
-<form id="postForm"><input id="title" required placeholder="Título de tu publicación"><select id="category"><option>Trabajo</option><option>Servicios</option><option>Compras</option><option>Ventas</option></select><textarea id="details" required placeholder="Describe tu publicación"></textarea><button class="primary">Agregar a esta demostración</button></form>
-<div id="notice" role="status"></div></section>
-</main><footer>© Cerca Ya · Versión de prueba</footer>
-<script src="app.js"></script><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});</script><script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDbKHWP1MQsmDvFReSz-EDKafFCBT3la_E",
-    authDomain: "cerca-ya-f67f0.firebaseapp.com",
-    projectId: "cerca-ya-f67f0",
-    storageBucket: "cerca-ya-f67f0.firebasestorage.app",
-    messagingSenderId: "943803719513",
-    appId: "1:943803719513:web:d3cd9b9d7fd9ea8da0f648"
-  };
+</main>
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const emailInput = document.getElementById("authEmail");
+<footer>
+  <div class="brand footer-brand">Cerca <b>Ya</b></div>
+  <p>Todo lo que buscas, cerca de ti.</p>
+  © Cerca Ya · Versión de prueba
+</footer>
+
+<script src="app.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+</script>
+
+<script type="module">
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDbKHWP1MQsmDvFReSz-EDKafFCBT3la_E",
+  authDomain: "cerca-ya-f67f0.firebaseapp.com",
+  projectId: "cerca-ya-f67f0",
+  storageBucket: "cerca-ya-f67f0.firebasestorage.app",
+  messagingSenderId: "943803719513",
+  appId: "1:943803719513:web:d3cd9b9d7fd9ea8da0f648"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const emailInput = document.getElementById("authEmail");
 const passwordInput = document.getElementById("authPassword");
 const notice = document.getElementById("authNotice");
 
@@ -93,7 +255,8 @@ document.getElementById("registerBtn").addEventListener("click", async () => {
     notice.textContent = "Error: " + error.message;
   }
 });
-  document.getElementById("forgotPassword").addEventListener("click", async () => {
+
+document.getElementById("forgotPassword").addEventListener("click", async () => {
   const email = emailInput.value.trim();
 
   if (!email) {
@@ -128,38 +291,36 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
 document.getElementById("logoutBtn").addEventListener("click", async () => {
   try {
     await signOut(auth);
-    notice.textContent = "Sesión cerrada correctamente.";
   } catch (error) {
-    notice.textContent = "Error: " + error.message;
+    document.getElementById("authNotice").textContent =
+      "Error: " + error.message;
   }
 });
+
 onAuthStateChanged(auth, (user) => {
-  const accountInfo = document.getElementById("accountInfo");
+  const visitorMenu = document.getElementById("visitorMenu");
+  const memberMenu = document.getElementById("memberMenu");
+  const publishSection = document.getElementById("publishSection");
   const userEmail = document.getElementById("userEmail");
-  const forgotPassword = document.getElementById("forgotPassword");
-  const registerBtn = document.getElementById("registerBtn");
-  const loginBtn = document.getElementById("loginBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
   const welcomeMessage = document.getElementById("welcomeMessage");
 
-  console.log("Sesión detectada:", user);
+  visitorMenu.hidden = !!user;
+  memberMenu.hidden = !user;
+  publishSection.hidden = !user;
 
-  forgotPassword.hidden = !!user;
-  registerBtn.hidden = !!user;
-  loginBtn.hidden = !!user;
-  logoutBtn.hidden = !user;
-  accountInfo.hidden = !user;
+  if (user) {
+    const username = user.email.split("@")[0];
 
-  userEmail.textContent = user ? user.email : "";
-
-  welcomeMessage.textContent = user
-    ? `¡Hola, ${user.email.split("@")[0]}! Bienvenido a CERCA YA.`
-    : "Todo lo que buscas, cerca de ti.";
-
-  notice.textContent = user
-    ? "¡Bienvenido a Cerca Ya! Tu sesión está activa."
-    : "No has iniciado sesión.";
+    userEmail.textContent = user.email;
+    welcomeMessage.textContent =
+      `¡Hola, ${username}! Bienvenido a CERCA YA.`;
+  } else {
+    welcomeMessage.textContent = "Todo lo que buscas, cerca de ti.";
+    document.getElementById("authNotice").textContent =
+      "No has iniciado sesión.";
+  }
 });
 </script>
+
 </body>
 </html>
