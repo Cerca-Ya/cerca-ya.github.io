@@ -7,7 +7,14 @@
 <title>Cerca Ya</title>
 </head>
 <body>
-<header><div class="brand"><span class="pin">⌖</span><span>Cerca <b>Ya</b></span></div><p>Todo lo que buscas, cerca de ti.</p></header>
+<header>
+  <div class="brand">
+    <span class="pin">⌖</span>
+    <span>Cerca <b>Ya</b></span>
+  </div>
+
+  <p id="welcomeMessage">Todo lo que buscas, cerca de ti.</p>
+</header>
 <main>
   <section class="publish">
   <h2>Bienvenido a Cerca Ya</h2>
@@ -127,12 +134,14 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
   }
 });
 onAuthStateChanged(auth, (user) => {
-const accountInfo = document.getElementById("accountInfo");
-const userEmail = document.getElementById("userEmail");
-const forgotPassword = document.getElementById("forgotPassword");
-const registerBtn = document.getElementById("registerBtn");
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
+  const accountInfo = document.getElementById("accountInfo");
+  const userEmail = document.getElementById("userEmail");
+  const forgotPassword = document.getElementById("forgotPassword");
+  const registerBtn = document.getElementById("registerBtn");
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const welcomeMessage = document.getElementById("welcomeMessage");
+
   console.log("Sesión detectada:", user);
 
   forgotPassword.hidden = !!user;
@@ -142,6 +151,10 @@ const logoutBtn = document.getElementById("logoutBtn");
   accountInfo.hidden = !user;
 
   userEmail.textContent = user ? user.email : "";
+
+  welcomeMessage.textContent = user
+    ? `¡Hola, ${user.email.split("@")[0]}! Bienvenido a CERCA YA.`
+    : "Todo lo que buscas, cerca de ti.";
 
   notice.textContent = user
     ? "¡Bienvenido a Cerca Ya! Tu sesión está activa."
