@@ -455,3 +455,31 @@ footer p {
     padding-right: 8%;
   }
   }
+
+/* MENÚ PERSONAL: BOTONES VERDES */
+#memberMenu a {
+  display: inline-flex;
+  align-items: center;
+  margin: 6px 8px 6px 0;
+  padding: 11px 16px;
+  border: 1px solid #cfe3d5;
+  border-radius: 12px;
+  background: #e8f4ec;
+  color: #17683b;
+  text-decoration: none;
+  font-weight: 650;
+  line-height: 1.3;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#memberMenu a:hover {
+  background: #d7eadc;
+  border-color: #a9cfb6;
+  color: #10552f;
+  transform: translateY(-1px);
+}
+
+#memberMenu a:focus-visible {
+  outline: 2px solid #17683b;
+  outline-offset: 3px;
+}
