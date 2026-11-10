@@ -126,14 +126,21 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
     notice.textContent = "Error: " + error.message;
   }
 });
-  const accountInfo = document.getElementById("accountInfo");
-const userEmail = document.getElementById("userEmail");
 onAuthStateChanged(auth, (user) => {
-  document.getElementById("registerBtn").hidden = !!user;
-  document.getElementById("loginBtn").hidden = !!user;
-  document.getElementById("logoutBtn").hidden = !user;
+const accountInfo = document.getElementById("accountInfo");
+const userEmail = document.getElementById("userEmail");
+const forgotPassword = document.getElementById("forgotPassword");
+const registerBtn = document.getElementById("registerBtn");
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+  console.log("Sesión detectada:", user);
 
+  forgotPassword.hidden = !!user;
+  registerBtn.hidden = !!user;
+  loginBtn.hidden = !!user;
+  logoutBtn.hidden = !user;
   accountInfo.hidden = !user;
+
   userEmail.textContent = user ? user.email : "";
 
   notice.textContent = user
